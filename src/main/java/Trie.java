@@ -197,20 +197,4 @@ public class Trie {
             }
         }
     }
-
-    /**
-     * Deletes a branch of nodes in the trie.
-     *
-     * @param node       the root of the branch
-     */
-    private void deleteBranch(Node node) {
-        if (node == null) {
-            return;
-        }
-        for (int i = 0; i < 30; i++) {
-            deleteBranch(node.children[i]);
-            node.children[i] = null;
-        }
-        node.word = null;
-    }
 }
