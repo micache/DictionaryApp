@@ -30,7 +30,7 @@ public class DictionaryApp extends Application {
         tabPane.getTabs().addAll(searchTab, translateTab, pronounceTab, manageTab);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        Scene scene = new Scene(tabPane, 800, 600);
+        Scene scene = new Scene(tabPane, 600, 400);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -40,11 +40,20 @@ public class DictionaryApp extends Application {
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(15));
 
+        Label titleLabel = new Label("Type the word you want to search...");
+        titleLabel.getStyleClass().add("title-label");
+
         TextField searchField = new TextField();
         searchField.setPromptText("Enter a word to search");
 
         Button searchButton = new Button("Search");
         Label meaningLabel = new Label();
+        meaningLabel.setWrapText(true);
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(meaningLabel);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefHeight(200);
 
         searchButton.setOnAction(e -> {
             String word = searchField.getText();
@@ -56,7 +65,7 @@ public class DictionaryApp extends Application {
             }
         });
 
-        vbox.getChildren().addAll(searchField, searchButton, meaningLabel);
+        vbox.getChildren().addAll(titleLabel, searchField, searchButton, scrollPane);
         return vbox;
     }
 
@@ -72,7 +81,8 @@ public class DictionaryApp extends Application {
         directionBox.setValue("English to Vietnamese");
 
         Button translateButton = new Button("Translate");
-        Label translationLabel = new Label();
+        TextField translationField = new TextField();
+        translationField.setEditable(false);
 
         translateButton.setOnAction(e -> {
             String word = translateField.getText();
@@ -80,14 +90,14 @@ public class DictionaryApp extends Application {
             String targetLang = directionBox.getValue().equals("English to Vietnamese") ? "vi" : "en";
             try {
                 String translation = GoogleTranslate.translate(word, sourceLang, targetLang);
-                translationLabel.setText(translation);
+                translationField.setText(translation);
             } catch (Exception ex) {
-                translationLabel.setText("Translation error!");
+                translationField.setText("Translation error!");
                 ex.printStackTrace();
             }
         });
 
-        vbox.getChildren().addAll(translateField, directionBox, translateButton, translationLabel);
+        vbox.getChildren().addAll(translateField, directionBox, translateButton, translationField);
         return vbox;
     }
 
@@ -122,6 +132,7 @@ public class DictionaryApp extends Application {
 
         // Add word section
         Label addLabel = new Label("Add Word");
+        addLabel.getStyleClass().add("section-label");
         TextField addWordField = new TextField();
         addWordField.setPromptText("Enter word");
         TextField addMeaningField = new TextField();
@@ -142,6 +153,7 @@ public class DictionaryApp extends Application {
 
         // Remove word section
         Label removeLabel = new Label("Remove Word");
+        removeLabel.getStyleClass().add("section-label");
         TextField removeWordField = new TextField();
         removeWordField.setPromptText("Enter word to remove");
         Button removeButton = new Button("Remove");
@@ -164,6 +176,7 @@ public class DictionaryApp extends Application {
     }
 
     public static void main(String[] args) {
+        DictionaryCommandline.loadDictionaryFromFile();
         launch(args);
     }
 }

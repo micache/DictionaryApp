@@ -158,7 +158,7 @@ public class DictionaryCommandline {
     /**
      * Loads the dictionary from a file.
      */
-    private static void loadDictionaryFromFile() {
+    public static void loadDictionaryFromFile() {
         DictionaryManagement manager = DictionaryManagement.getInstance();
         manager.importFromFile();
     }

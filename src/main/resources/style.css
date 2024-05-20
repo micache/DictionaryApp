@@ -34,7 +34,19 @@
     -fx-font-size: 14px;
 }
 
-.combo-box {
-    -fx-padding: 10px;
-    -fx-font-size: 14px;
+.title-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.scroll-pane {
+    -fx-background-color: white;
+    -fx-border-color: #0078d7;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
 }
