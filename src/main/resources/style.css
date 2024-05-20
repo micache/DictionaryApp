@@ -1,24 +1,40 @@
 .root {
-    -fx-padding: 20px;
     -fx-font-family: "Arial";
+    -fx-font-size: 14px;
 }
 
-.header-label {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
+.tab-pane {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10px;
 }
 
 .button {
-    -fx-background-color: #2a9df4;
+    -fx-padding: 10px 20px;
+    -fx-background-color: #0078d7;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
 }
 
-.text-area, .text-field {
-    -fx-padding: 5px;
+.button:hover {
+    -fx-background-color: #005bb5;
 }
 
-.text-area {
-    -fx-min-height: 100px;
+.text-field {
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-border-color: #0078d7;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.label {
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}
+
+.combo-box {
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
 }

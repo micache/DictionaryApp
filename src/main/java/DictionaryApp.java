@@ -1,75 +1,166 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DictionaryApp extends Application {
-    private Map<String, String> dictionary = new HashMap<>();
+
+    private DictionaryManagement dictionaryManager = DictionaryManagement.getInstance();
 
     @Override
     public void start(Stage primaryStage) {
-        // Top
-        Label header = new Label("Dictionary");
-        header.getStyleClass().add("header-label");
+        primaryStage.setTitle("Dictionary App");
 
-        // Center
-        GridPane centerGrid = new GridPane();
-        centerGrid.setHgap(10);
-        centerGrid.setVgap(10);
+        TabPane tabPane = new TabPane();
 
-        TextField wordInput = new TextField();
-        wordInput.setPromptText("Enter a word");
+        Tab searchTab = new Tab("Search");
+        searchTab.setContent(createSearchTab());
 
-        TextField definitionInput = new TextField();
-        definitionInput.setPromptText("Enter the definition");
+        Tab translateTab = new Tab("Translate");
+        translateTab.setContent(createTranslateTab());
 
-        Button addButton = new Button("Add Word");
-        Button searchButton = new Button("Search Word");
+        Tab pronounceTab = new Tab("Pronounce");
+        pronounceTab.setContent(createPronounceTab());
 
-        TextArea definitionArea = new TextArea();
-        definitionArea.setEditable(false);
+        Tab manageTab = new Tab("Manage");
+        manageTab.setContent(createManageTab());
 
-        centerGrid.add(new Label("Word:"), 0, 0);
-        centerGrid.add(wordInput, 1, 0);
-        centerGrid.add(new Label("Definition:"), 0, 1);
-        centerGrid.add(definitionInput, 1, 1);
-        centerGrid.add(addButton, 2, 0);
-        centerGrid.add(searchButton, 2, 1);
-        centerGrid.add(definitionArea, 0, 2, 3, 1);
+        tabPane.getTabs().addAll(searchTab, translateTab, pronounceTab, manageTab);
+        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
-        // Actions
-        addButton.setOnAction(e -> {
-            dictionary.put(wordInput.getText(), definitionInput.getText());
-            wordInput.clear();
-            definitionInput.clear();
-            definitionArea.setText("Word added successfully!");
-        });
+        Scene scene = new Scene(tabPane, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private VBox createSearchTab() {
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(15));
+
+        TextField searchField = new TextField();
+        searchField.setPromptText("Enter a word to search");
+
+        Button searchButton = new Button("Search");
+        Label meaningLabel = new Label();
 
         searchButton.setOnAction(e -> {
-            String definition = dictionary.get(wordInput.getText());
-            if (definition != null) {
-                definitionArea.setText(definition);
+            String word = searchField.getText();
+            Word result = dictionaryManager.lookupWord(word);
+            if (result != null) {
+                meaningLabel.setText(result.getWordExplain());
             } else {
-                definitionArea.setText("Word not found!");
+                meaningLabel.setText("Word not found!");
             }
         });
 
-        // Layout
-        BorderPane root = new BorderPane();
-        root.setTop(header);
-        root.setCenter(centerGrid);
+        vbox.getChildren().addAll(searchField, searchButton, meaningLabel);
+        return vbox;
+    }
 
-        // Styling
-        Scene scene = new Scene(root, 500, 400);
-        scene.getStylesheets().add("style.css");  // Link to your CSS file
+    private VBox createTranslateTab() {
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(15));
 
-        // Stage
-        primaryStage.setTitle("Enhanced Dictionary App");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        TextField translateField = new TextField();
+        translateField.setPromptText("Enter a word to translate");
+
+        ComboBox<String> directionBox = new ComboBox<>();
+        directionBox.getItems().addAll("English to Vietnamese", "Vietnamese to English");
+        directionBox.setValue("English to Vietnamese");
+
+        Button translateButton = new Button("Translate");
+        Label translationLabel = new Label();
+
+        translateButton.setOnAction(e -> {
+            String word = translateField.getText();
+            String sourceLang = directionBox.getValue().equals("English to Vietnamese") ? "en" : "vi";
+            String targetLang = directionBox.getValue().equals("English to Vietnamese") ? "vi" : "en";
+            try {
+                String translation = GoogleTranslate.translate(word, sourceLang, targetLang);
+                translationLabel.setText(translation);
+            } catch (Exception ex) {
+                translationLabel.setText("Translation error!");
+                ex.printStackTrace();
+            }
+        });
+
+        vbox.getChildren().addAll(translateField, directionBox, translateButton, translationLabel);
+        return vbox;
+    }
+
+    private VBox createPronounceTab() {
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(15));
+
+        TextField pronounceField = new TextField();
+        pronounceField.setPromptText("Enter a word to pronounce");
+
+        Button pronounceButton = new Button("Pronounce");
+        Label statusLabel = new Label();
+
+        pronounceButton.setOnAction(e -> {
+            String word = pronounceField.getText();
+            try {
+                GoogleTranslate.speak(word, "en");
+                statusLabel.setText("Pronouncing: " + word);
+            } catch (Exception ex) {
+                statusLabel.setText("Pronunciation error!");
+                ex.printStackTrace();
+            }
+        });
+
+        vbox.getChildren().addAll(pronounceField, pronounceButton, statusLabel);
+        return vbox;
+    }
+
+    private VBox createManageTab() {
+        VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(15));
+
+        // Add word section
+        Label addLabel = new Label("Add Word");
+        TextField addWordField = new TextField();
+        addWordField.setPromptText("Enter word");
+        TextField addMeaningField = new TextField();
+        addMeaningField.setPromptText("Enter meaning");
+        Button addButton = new Button("Add");
+        Label addStatusLabel = new Label();
+
+        addButton.setOnAction(e -> {
+            String word = addWordField.getText();
+            String meaning = addMeaningField.getText();
+            if (!word.isEmpty() && !meaning.isEmpty()) {
+                dictionaryManager.addWord(word, meaning);
+                addStatusLabel.setText("Word added successfully!");
+            } else {
+                addStatusLabel.setText("Word or meaning cannot be empty!");
+            }
+        });
+
+        // Remove word section
+        Label removeLabel = new Label("Remove Word");
+        TextField removeWordField = new TextField();
+        removeWordField.setPromptText("Enter word to remove");
+        Button removeButton = new Button("Remove");
+        Label removeStatusLabel = new Label();
+
+        removeButton.setOnAction(e -> {
+            String word = removeWordField.getText();
+            if (dictionaryManager.removeWord(word)) {
+                removeStatusLabel.setText("Word removed successfully!");
+            } else {
+                removeStatusLabel.setText("Word not found!");
+            }
+        });
+
+        vbox.getChildren().addAll(
+                addLabel, addWordField, addMeaningField, addButton, addStatusLabel,
+                removeLabel, removeWordField, removeButton, removeStatusLabel
+        );
+        return vbox;
     }
 
     public static void main(String[] args) {
