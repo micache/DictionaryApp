@@ -59,9 +59,10 @@ public class DictionaryManagement {
      */
     public void exportToFile(String outputPath) {
         try (PrintStream out = new PrintStream(new FileOutputStream(outputPath))) {
-            System.setOut(out);
-            dictionary.exportWords();
-            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+            PrintStream originalOut = System.out; // Store original System.out
+            System.setOut(out); // Redirect System.out to the file
+            dictionary.exportWords(); // Export dictionary words
+            System.setOut(originalOut); // Restore original System.out
             System.out.println("Dictionary has been exported to file!");
         } catch (IOException e) {
             e.printStackTrace();

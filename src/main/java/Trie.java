@@ -27,13 +27,13 @@ public class Trie {
         root = new Node();
         charsetSize = 0;
         charset = new HashMap<>();
-        for (char c = 'a'; c <= 'z'; c++) {
-            charset.put(c, charsetSize++);
-        }
         charset.put('-', charsetSize++);
         charset.put(' ', charsetSize++);
         charset.put('.', charsetSize++);
         charset.put('\'', charsetSize++);
+        for (char c = 'a'; c <= 'z'; c++) {
+            charset.put(c, charsetSize++);
+        }
     }
 
     /**
@@ -202,17 +202,14 @@ public class Trie {
      * Deletes a branch of nodes in the trie.
      *
      * @param node       the root of the branch
-     * @param freeMemory true to free memory after deleting, false otherwise
      */
-    private void deleteBranch(Node node, boolean freeMemory) {
+    private void deleteBranch(Node node) {
         if (node == null) {
             return;
         }
         for (int i = 0; i < 30; i++) {
-            deleteBranch(node.children[i], freeMemory);
-            if (freeMemory) {
-                node.children[i] = null;
-            }
+            deleteBranch(node.children[i]);
+            node.children[i] = null;
         }
         node.word = null;
     }

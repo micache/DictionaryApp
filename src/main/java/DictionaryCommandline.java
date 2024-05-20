@@ -11,15 +11,6 @@ public class DictionaryCommandline {
     private final DictionaryManagement manager = DictionaryManagement.getInstance();
 
     /**
-     * Pauses the program and waits for user input.
-     */
-    private void pause() {
-        System.out.println("Press any key to continue...");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-    }
-
-    /**
      * Displays all words in the dictionary.
      */
     private void displayAllWords() {
@@ -34,7 +25,9 @@ public class DictionaryCommandline {
                 System.out.printf("%-8s| %-" + maxLength + "s | %s\n", "", "", meanings[j]);
             }
         }
-        pause();
+        System.out.println("Press any key to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
@@ -52,7 +45,9 @@ public class DictionaryCommandline {
         } else {
             System.out.println(result.getWordExplain());
         }
-        pause();
+        System.out.println("Press any key to continue...");
+        scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
@@ -70,7 +65,9 @@ public class DictionaryCommandline {
         } else {
             System.out.println("Failed to update word.");
         }
-        pause();
+        System.out.println("Press any key to continue...");
+        scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
@@ -86,7 +83,9 @@ public class DictionaryCommandline {
         } else {
             System.out.println("Failed to delete word.");
         }
-        pause();
+        System.out.println("Press any key to continue...");
+        scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
@@ -122,7 +121,9 @@ public class DictionaryCommandline {
         } else {
             results.forEach(word -> System.out.println("- " + word.getWordTarget()));
         }
-        pause();
+        System.out.println("Press any key to continue...");
+        scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     /**
