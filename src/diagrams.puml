@@ -1,0 +1,10 @@
+@startuml
+class Dictionary {
+  -String wordTarget
+  -String wordExplain
+  +Word(String wordTarget, String wordExplain)
+  +void setWordExplain(String wordExplain)
+  +String getWordTarget()
+  +String getWordExplain()
+}
+@enduml
