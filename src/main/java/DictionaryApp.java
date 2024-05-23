@@ -36,14 +36,16 @@ public class DictionaryApp extends Application {
         Tab translateTab = new Tab("Translate", createTabContent(createTranslateTab(), "translate.css"));
         Tab pronounceTab = new Tab("Pronounce", createTabContent(createPronounceTab(), "pronounce.css"));
         Tab manageTab = new Tab("Manage", createTabContent(createManageTab(), "manage.css"));
+        Tab quizGameTab = new Tab("Quiz Game", createTabContent(createQuizGameTab(), "quizgame.css"));
 
-        tabPane.getTabs().addAll(searchTab, translateTab, pronounceTab, manageTab);
+        tabPane.getTabs().addAll(searchTab, translateTab, pronounceTab, manageTab, quizGameTab);
 
         sidebar.getChildren().addAll(
                 createSidebarItem("search.png", "Search", tabPane, searchTab),
                 createSidebarItem("translate.png", "Translate", tabPane, translateTab),
                 createSidebarItem("pronounce.png", "Pronounce", tabPane, pronounceTab),
-                createSidebarItem("manage.png", "Manage", tabPane, manageTab)
+                createSidebarItem("manage.png", "Manage", tabPane, manageTab),
+                createSidebarItem("quizgame.png", "Quiz Game", tabPane, quizGameTab)
         );
 
         BorderPane root = new BorderPane();
@@ -300,6 +302,17 @@ public class DictionaryApp extends Application {
                 removeLabel, removeWordField, removeButton, removeStatusLabel,
                 editLabel, editWordField, editMeaningField, editButton, editStatusLabel
         );
+        return vbox;
+    }
+
+    private VBox createQuizGameTab() {
+        VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(20);
+
+        // Create QuizGameUI instance
+        QuizGameUI quizGameUI = new QuizGameUI(vbox);
+
         return vbox;
     }
 
