@@ -1,0 +1,10 @@
+The quick brown fox _ over the lazy dog./runs/jumps/sleeps/eats/B
+To be or not to _, that is the question./see/do/be/go/C
+A journey of a thousand miles begins with a single _. /mile/step/goal/plan/B
+She sells sea shells by the _. /riverbank/market/seashore/forest/C
+All that glitters is not _. /stone/gold/diamond/silver/B
+A picture is worth a thousand _. /images/sounds/moments/words/D
+Actions speak louder than _. /silence/noises/gestures/words/D
+Beauty is in the eye of the _. /artist/viewer/beholder/watcher/C
+Better late than _. /early/soon/later/never/D
+Birds of a feather flock _. /apart/alone/away/together/D

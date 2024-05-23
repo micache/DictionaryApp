@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static java.lang.System.exit;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * A command-line interface for managing a dictionary.
@@ -127,10 +129,11 @@ public class DictionaryCommandline {
     }
 
     /**
-     * Placeholder for a game functionality.
+     * Plays the quiz game using questions from a file.
      */
     private void playGame() {
-        // Placeholder for game functionality
+        QuizzGame game = new QuizzGame();
+        game.startQuiz();
     }
 
     /**
