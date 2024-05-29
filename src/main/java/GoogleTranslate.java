@@ -61,11 +61,11 @@ public class GoogleTranslate {
     public static void main(String[] args) {
         try {
             // Test translation
-            String translatedText = GoogleTranslate.translate("tôi đi ăn cơm", "vi", "en");
+            String translatedText = GoogleTranslate.translate("ngày ronaldo trở về", "vi", "en");
             System.out.println("Translated text: " + translatedText);
 
             // Test text-to-speech
-            GoogleTranslate.speak("Neeko is the best decision!", "en");
+            GoogleTranslate.speak("Test special verb", "en");
         } catch (Exception e) {
             e.printStackTrace();
         }

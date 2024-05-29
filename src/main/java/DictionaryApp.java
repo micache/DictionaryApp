@@ -79,7 +79,7 @@ public class DictionaryApp extends Application {
         imageView.setFitWidth(24);
 
         Label label = new Label(text);
-        label.setStyle("-fx-text-fill: white; -fx-font-size: 12px;");
+        label.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Increased font size
 
         vbox.getChildren().addAll(imageView, label);
         vbox.setOnMouseClicked(event -> tabPane.getSelectionModel().select(tab));
@@ -111,20 +111,24 @@ public class DictionaryApp extends Application {
 
         Label titleLabel = new Label("Type the word you want to search...");
         titleLabel.getStyleClass().add("title-label");
+        titleLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField searchField = new TextField();
         searchField.setPromptText("Enter a word to search");
+        searchField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Button searchButton = new Button("Search");
         searchButton.getStyleClass().add("action-button");
+        searchButton.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Label meaningLabel = new Label();
         meaningLabel.setWrapText(true);
+        meaningLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(meaningLabel);
         scrollPane.setFitToWidth(true);
-        scrollPane.setPrefHeight(200);
+        scrollPane.setPrefHeight(400);
 
         searchButton.setOnAction(e -> {
             String word = searchField.getText();
@@ -150,19 +154,26 @@ public class DictionaryApp extends Application {
 
         Label titleLabel = new Label("Type the word you want to translate...");
         titleLabel.getStyleClass().add("title-label");
+        titleLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField translateField = new TextField();
         translateField.setPromptText("Enter a word to translate");
+        translateField.setStyle("-fx-font-size: 16px;"); // Increased font size
+        translateField.setPrefHeight(100);
 
         ComboBox<String> directionBox = new ComboBox<>();
         directionBox.getItems().addAll("English to Vietnamese", "Vietnamese to English");
         directionBox.setValue("English to Vietnamese");
+        directionBox.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Button translateButton = new Button("Translate");
         translateButton.getStyleClass().add("action-button");
+        translateButton.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField translationField = new TextField();
         translationField.setEditable(false);
+        translationField.setStyle("-fx-font-size: 16px;"); // Increased font size
+        translationField.setPrefHeight(100);
 
         translateButton.setOnAction(e -> {
             String word = translateField.getText();
@@ -191,14 +202,18 @@ public class DictionaryApp extends Application {
 
         Label titleLabel = new Label("Type the word you want to pronounce...");
         titleLabel.getStyleClass().add("title-label");
+        titleLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField pronounceField = new TextField();
         pronounceField.setPromptText("Enter a word to pronounce");
+        pronounceField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Button pronounceButton = new Button("Pronounce");
         pronounceButton.getStyleClass().add("action-button");
+        pronounceButton.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Label statusLabel = new Label();
+        statusLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         pronounceButton.setOnAction(e -> {
             String word = pronounceField.getText();
@@ -225,18 +240,23 @@ public class DictionaryApp extends Application {
 
         // Add word section
         Label addLabel = new Label("Add Word");
-        addLabel.getStyleClass().add("section-label");
+        addLabel.getStyleClass().add("title-label");
+        addLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField addWordField = new TextField();
         addWordField.setPromptText("Enter word");
+        addWordField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField addMeaningField = new TextField();
         addMeaningField.setPromptText("Enter meaning");
+        addMeaningField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Button addButton = new Button("Add");
         addButton.getStyleClass().add("action-button");
+        addButton.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Label addStatusLabel = new Label();
+        addStatusLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         addButton.setOnAction(e -> {
             String word = addWordField.getText();
@@ -251,15 +271,19 @@ public class DictionaryApp extends Application {
 
         // Remove word section
         Label removeLabel = new Label("Remove Word");
-        removeLabel.getStyleClass().add("section-label");
+        removeLabel.getStyleClass().add("title-label");
+        removeLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField removeWordField = new TextField();
         removeWordField.setPromptText("Enter word to remove");
+        removeWordField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Button removeButton = new Button("Remove");
         removeButton.getStyleClass().add("action-button");
+        removeButton.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Label removeStatusLabel = new Label();
+        removeStatusLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         removeButton.setOnAction(e -> {
             String word = removeWordField.getText();
@@ -272,18 +296,23 @@ public class DictionaryApp extends Application {
 
         // Edit word section
         Label editLabel = new Label("Edit Word");
-        editLabel.getStyleClass().add("section-label");
+        editLabel.getStyleClass().add("title-label");
+        editLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField editWordField = new TextField();
         editWordField.setPromptText("Enter word to edit");
+        editWordField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         TextField editMeaningField = new TextField();
         editMeaningField.setPromptText("Enter new meaning");
+        editMeaningField.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Button editButton = new Button("Edit");
         editButton.getStyleClass().add("action-button");
+        editButton.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         Label editStatusLabel = new Label();
+        editStatusLabel.setStyle("-fx-font-size: 16px;"); // Increased font size
 
         editButton.setOnAction(e -> {
             String word = editWordField.getText();

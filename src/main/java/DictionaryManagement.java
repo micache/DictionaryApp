@@ -18,7 +18,7 @@ public class DictionaryManagement {
     }
 
     /**
-     * Gets the singleton instance of DictionaryManager.
+     * Gets the singleton instance of DictionaryManagement.
      *
      * @return the singleton instance
      */
